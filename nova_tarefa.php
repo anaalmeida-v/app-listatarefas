@@ -45,9 +45,10 @@
 				<div class="container pagina">
 					<div class="row">
 						<div class="col">
-							<h4>Nova tarefa</h4>
+							<h4>Nova tarefa</h4>	
 							<hr />
-							<form method="post" action="tarefa_controller.php">
+							<form method="post" action="tarefa_controller.php?acao=inserir">
+								<!--tarefa_controller.php só será executado, se existir 'acao' e se 'acao for = existir'-->
 								<!--método post + destino(para onde dados serão enviados)-->
 								<div class="form-group">
 									<label>Descrição da tarefa:</label>
