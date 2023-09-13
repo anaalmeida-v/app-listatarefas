@@ -15,26 +15,37 @@ require 'tarefa_controller.php'; //recuperando tarefa_controller do repositório
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<script>
-		function editar(id) {
+		function editar(id, txt_tarefa) {
 			//criar form de edicao
 			let form = document.createElement('form')
 			form.action = '#';
 			form.method = 'post';
+			form.className = 'row'
 
 			//criar input para entrada do texto
 			let inputTarefa = document.createElement('input')
 			inputTarefa.type = 'text'
 			inputTarefa.name = 'tarefa'
-			inputTarefa.className = 'form-control'
+			inputTarefa.className = 'col-9 form-control'
+			inputTarefa.value = txt_tarefa
 
-			//criar um button para o envio do form
+			//criar um input hidden para guardar o id da tarefa
+			let inputId = document.createElement('input')
+			inputId.type = 'hidden'//'oculto'
+			inputId.name = 'Id'
+			inputId.value = id//valor do parâmetro
+
+			//criar um button para envio do form
 			let button = document.createElement('button')
 			button.type = 'submit'
-			button.className = 'btn btn-info'
+			button.className = 'col-3 btn btn-info'
 			button.innerHTML = 'Atualizar'//adicionando texto ao elemento('dentro do HTML/HTML interno)
 
 			//incluir inputTarefa no form
 			form.appendChild(inputTarefa)
+
+			//incluir inputId no form
+			form.appendChild(input Id)
 
 			//incluir button no form
 			form.appendChild(button)
@@ -49,9 +60,8 @@ require 'tarefa_controller.php'; //recuperando tarefa_controller do repositório
 			tarefa.innerHTML = ''
 
 			//incluir form na página
-			tarefa.insertBefore(form, tarefa[0])
-			//insertBefore -- permite que uma árvore de elementos HTML seja inserida dentro de um outro elemento já renderizado
-			//insert após a renderização da página (método nativo da API do BD)
+			tarefa.insertBefore(form, tarefa[0])//árvore de elementos que será adicionada, nó dentro de tarefa que a árvore de elementos será adicionada
+			//insertBefore --- insert após a renderização da página (método nativo da API do DOM)
 		}
 	</script>
 </head>
@@ -83,15 +93,17 @@ require 'tarefa_controller.php'; //recuperando tarefa_controller do repositório
 							<h4>Todas tarefas</h4>
 							<hr />
 
+
+
 							<?php foreach ($tarefas as $indice => $tarefa) { ?>
 								<div class="row mb-3 d-flex align-items-center tarefa">
 									<div class="col-sm-9" id="tarefa_<?= $tarefa->id ?>">
-										<?= $tarefa->tarefa ?>
-										(<?= $tarefa->status ?>)
+										<?= $tarefa->tarefa ?> (<?= $tarefa->status ?>)
 									</div>
 									<div class="col-sm-3 mt-2 d-flex justify-content-between">
 										<i class="fas fa-trash-alt fa-lg text-danger"></i>
-										<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $tarefa->id ?>)"></i>
+										<i class="fas fa-edit fa-lg text-info"
+											onclick="editar(<?= $tarefa->id ?>, '<?= $tarefa->tarefa ?>')"></i>
 										<i class="fas fa-check-square fa-lg text-success"></i>
 									</div>
 								</div>
