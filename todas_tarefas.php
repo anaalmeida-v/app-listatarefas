@@ -16,13 +16,14 @@ require 'tarefa_controller.php'; //recuperando tarefa_controller do repositório
 		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<script>
 		function editar(id, txt_tarefa) {
-			//criar form de edicao
+
+			//criar um form de edição
 			let form = document.createElement('form')
-			form.action = '#';
-			form.method = 'post';
+			form.action = 'tarefa_controller.php?acao=atualizar'
+			form.method = 'post'
 			form.className = 'row'
 
-			//criar input para entrada do texto
+			//criar um input para entrada do texto
 			let inputTarefa = document.createElement('input')
 			inputTarefa.type = 'text'
 			inputTarefa.name = 'tarefa'
@@ -32,7 +33,7 @@ require 'tarefa_controller.php'; //recuperando tarefa_controller do repositório
 			//criar um input hidden para guardar o id da tarefa
 			let inputId = document.createElement('input')
 			inputId.type = 'hidden'//'oculto'
-			inputId.name = 'Id'
+			inputId.name = 'id'
 			inputId.value = id//valor do parâmetro
 
 			//criar um button para envio do form
@@ -45,7 +46,7 @@ require 'tarefa_controller.php'; //recuperando tarefa_controller do repositório
 			form.appendChild(inputTarefa)
 
 			//incluir inputId no form
-			form.appendChild(input Id)
+			form.appendChild(inputId)
 
 			//incluir button no form
 			form.appendChild(button)
